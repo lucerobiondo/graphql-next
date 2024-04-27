@@ -59,24 +59,23 @@ const ProjectCard = ({ project }) => {
     return (
         <div
             className="gap-3 m-5 p-10
-             flex w-50 bg-zinc-800 border-solid border-1 
+             flex size-fit w-auto bg-zinc-800 border-solid border-1 
              border-blue w-full rounded-lg shadow-lg p-4 mb-2 hover:bg-zinc-700"
-            onClick={() => { setUpdateP(project._id) }}
         >
             <div className="px-20 py-5 1px border-2 border-red border-solid 
-                    flex flex-col items-start justify-start gap-5 w-100">
+                    flex flex-col items-start justify-start gap-5 w-auto">
                 <h2 className="text-lg font-bold text-white">Nombre: {project.name}</h2>
                 <p className="text-slate-400 text-sm text-white">Descripción: {project.description}</p>
-            <div>
-                <button onClick={() => handleDelete(project._id)} className="bg-red-500 px-5 py-2">
-                    {deleting ? "Eliminanod..." : "Borrar"}
-                </button>
-            </div>
-            <div>
-                <button onClick={() => handleSelectUpdate(project._id)} className="bg-red-500 px-5 py-2">
-                    Editar
-                </button>
-            </div>
+                <div>
+                    <button onClick={() => handleDelete(project._id)} className="bg-red-500 px-5 py-2">
+                        {deleting ? "Eliminando..." : "Borrar"}
+                    </button>
+                </div>
+                <div>
+                    <button onClick={() => handleSelectUpdate(project._id)} className="bg-red-500 px-5 py-2">
+                        Editar
+                    </button>
+                </div>
             </div>
             {
                 updateP && updateP === project._id && (
@@ -87,9 +86,14 @@ const ProjectCard = ({ project }) => {
                             onChange={(e) => handleChange("name", e.target.value)} />
                         <input type="text" className="text-lg font-bold rounded-sm px-5 py-0" value={form.description}
                             onChange={(e) => handleChange("description", e.target.value)} />
-                        <button onClick={() => handleUpdate(form._id)} className="bg-red-500 px-5 py-2 rounded-sm">
-                            {updating ? "Actualizando..." : "Actualizar"}
-                        </button>
+                        <div className="flex gap-5">
+                            <button onClick={() => handleUpdate(form._id)} className="bg-red-500 px-5 py-2 rounded-sm">
+                                {updating ? "Actualizando..." : "Actualizar"}
+                            </button>
+                            <button onClick={() => handleSelectUpdate(null)} className="bg-red-500 px-5 py-2">
+                                Cerrar
+                            </button>
+                        </div>
                     </div>
                 )
             }
