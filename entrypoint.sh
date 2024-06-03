@@ -1,0 +1,1 @@
+chown -R $(whoami) data

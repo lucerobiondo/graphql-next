@@ -1,0 +1,58 @@
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: web
+    restart: always
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    restart: always
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
+
+
+
+
+
+
+# version: '3.8'
+
+# services:
+#   graphql-next:
+#     build: .
+#     ports:
+#       - "3090:3000"
+#     depends_on:
+#       - mongo
+#     environment:
+#       - MONGODB_URI=mongodb://mongo:27018/examplegraphqldb
+#     networks:
+#       - app-net
+
+#   mongo:
+#     image: mongo:4.4
+#     ports:
+#       - "27018:27017"
+#     volumes:
+#       - mongo-data:/data/db
+#     networks:
+#       - app-net
+
+# volumes:
+#   mongo-data:
+
+# networks:
+#   app-net:
+
+#****************************************
